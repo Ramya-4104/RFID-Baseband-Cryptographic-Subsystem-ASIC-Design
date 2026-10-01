@@ -150,56 +150,11 @@ rfid_tb_top.sv
 The documented compilation hierarchy includes the DBB RTL, PRESENT-80 RTL, top-level integration, and `rfid_tb_top.sv` testbench.
 
 ---
-
 # Operating Modes
 
-## Mode 0 — Live RFID Reception
+The subsystem supports three functional modes: **Live RFID Reception (Mode 0)**, **DBB Loopback (Mode 1)**, and **Crypto Loopback (Mode 2)**.
 
-```mermaid
-flowchart LR
-    RX[rfid_rx_bit] --> DBB[dbb_top<br/>Digital Baseband]
-    DBB -->|64-bit frame + valid| PRESENT[present_core<br/>PRESENT-80]
-    PRESENT --> OUT[DATA_OUT]
-    OUT --> APB[APB Read]
-```
-
-In Live Mode, the external `rfid_rx_bit` is processed by the complete DBB receive chain. A completed 64-bit frame is transferred to the PRESENT-80 core and subsequently made available through the output registers.
-
----
-
-## Mode 1 — DBB Loopback
-
-```mermaid
-flowchart LR
-    DATA[DATA_0 / DATA_1] --> TOP[crypto_rfid_top]
-    TOP -->|lb_load| SER[dbb_loopback_serializer]
-    SER --> DBB[DBB Receive Pipeline]
-    DBB --> FRAME[frame_data_out0/1]
-    FRAME --> OUT[DATA_OUT]
-```
-
-Mode 1 bypasses the external RF input and uses APB-provided data as the DBB test source. The loopback serializer generates the serial frame, which is then processed by the receive chain.
-
-The serializer inserts SOF, parity, and EOF around the Manchester-encoded payload.
-
----
-
-## Mode 2 — Crypto Loopback
-
-```mermaid
-flowchart LR
-    DATA[DATA_0 / DATA_1] --> TOP[crypto_rfid_top]
-    TOP --> PRESENT[present_core<br/>PRESENT-80]
-    PRESENT --> OUT[DATA_OUT]
-```
-
-Mode 2 directly supplies the APB-provided 64-bit plaintext to PRESENT-80, bypassing the DBB.
-
----
-
-## Mode 3 — Reserved
-
-Mode 3 is reserved. The wrapper allows `cipher_data_in` to follow `DATA_0/DATA_1`, but no cipher start is generated and `DATA_OUT` retains its previous value.
+![Operating Modes](operating_modes.png)
 
 ---
 
