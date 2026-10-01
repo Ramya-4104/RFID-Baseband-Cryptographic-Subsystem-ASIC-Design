@@ -26,7 +26,6 @@ An RTL implementation of an **RFID Digital Baseband (DBB) and PRESENT-80 cryptog
 - [Project Outputs](https://chatgpt.com/c/6abe3140-96ac-83e9-9ff8-9793669ea69c#project-outputs)
 - [Design Considerations](https://chatgpt.com/c/6abe3140-96ac-83e9-9ff8-9793669ea69c#design-considerations)
 - [Future Work](https://chatgpt.com/c/6abe3140-96ac-83e9-9ff8-9793669ea69c#future-work)
-- [References](https://chatgpt.com/c/6abe3140-96ac-83e9-9ff8-9793669ea69c#references)
 - [Authors](https://chatgpt.com/c/6abe3140-96ac-83e9-9ff8-9793669ea69c#authors)
 
 ---
@@ -763,19 +762,6 @@ The following items are planned project stages rather than currently completed f
 - Add final area, timing, power, and physical-design results to this README.
 
 Additional architectural decisions identified in the project documentation, such as clock gating strategy and handling of bursty Mode 2 writes while PRESENT-80 is busy, should be resolved and documented as the implementation progresses.
-
----
-
-# References
-
-The current README is based on the supplied project documentation:
-
-- RFID architecture and subsystem overview
-- `crypto_rfid_top` APB wrapper documentation
-- Crypto-RFID RTL hierarchy documentation
-- Digital Baseband module documentation
-
-The supplied documentation identifies the DBB as an **ISO/IEC 14443A Type A, 106 kbit/s Manchester receive path** and specifies the implemented 50 MHz timing architecture.
 
 ---
 
